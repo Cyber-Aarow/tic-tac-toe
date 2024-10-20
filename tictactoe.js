@@ -1,16 +1,16 @@
 var pubsub = require('pubsub.js');
 
-const Player = (letter) => {
+function Player(value){
     let score = 0;
-    function chooseSpot(number){
-
+    const chooseSpot = (spot) => {
+        GameBoard.setBoard(spot, value);
     }
     return {
+        chooseSpot
+    };
+}
 
-    }
-};
-
-const Game = () => {
+function Game(){
     pubsub.subscribe('win1', function(){
         console.log("Player 1 wins!");
     });
@@ -18,91 +18,92 @@ const Game = () => {
         console.log("Player 2 wins!");
     });
 
-};
+    const switchPlayer = () => {
 
-const GameBoard = () => {
-    let board = [];
+    };
+}
 
-    function _render(){}
+function GameBoard(){
+    const board = [];
+    for(let i = 0; i < 9; i++) board.push(0);
+    const _render = () =>{};
 
-    function newBoard(){
-        for(let i = 0; i < 9; i++) board.push(0);
-    }
+    const clearBoard = () =>{
+        for(let i = 0; i < 9; i++) board[i] = 0;
+    };
 
-    function setBoard(id, player){
-        board[id] = player;
-    }
-    
-    function getBoard(){
-        return board;
-    }
+    const setBoard = (spot, value) =>{
+    };
 
-    //Win Checks
+    const getBoard = () =>{
+        board;
+    };
+}
+   /* //Win Checks
     //Rows
-    function rowOneCheck(){
+    const rowOneCheck {
         if(board[0] === board[1] === board[2] && board[0] === 1){
             pubsub.publish('win1');
         }
         else if(board[0] === board[1] === board[2] && board[0] === 1){
             pubsub.publish('win2');
         }
-    }
-    function rowTwoCheck(){
+    };
+    const rowTwoCheck {
         if(board[3] === board[4] === board[5] && board[3] === 1){
             pubsub.publish('win1');
         }
         else if(board[3] === board[4] === board[5] && board[3] === 1){
             pubsub.publish('win2');
         }
-    }
-    function rowThreeCheck(){
+    };
+    const rowThreeCheck {
         if(board[6] === board[7] === board[8] && board[6] === 1){
             pubsub.publish('win1');
         }
         else if(board[6] === board[7] === board[8] && board[6] === 1){
             pubsub.publish('win2');
         }
-    }
+    };
     //Columns
-    function colOneCheck(){
+    const colOneCheck {
         if(board[0] === board[3] === board[6] && board[0] === 1){
             pubsub.publish('win1');
         }
         else if(board[0] === board[3] === board[6] && board[0] === 1){
             pubsub.publish('win2');
         }
-    }
-    function colTwoCheck(){
+    };
+    const colTwoCheck {
         if(board[1] === board[4] === board[7] && board[1] === 1){
             pubsub.publish('win1');
         }
         else if(board[1] === board[4] === board[7] && board[1] === 1){
             pubsub.publish('win2');
         }
-    }
-    function colThreeCheck(){
+    };
+    const colThreeCheck {
         if(board[2] === board[5] === board[8] && board[2] === 1){
             pubsub.publish('win1');
         }
         else if(board[2] === board[5] === board[8] && board[2] === 1){
             pubsub.publish('win2');
         }
-    }
+    };
     //Diagonals
-    function diagLTRCheck(){
+    const diagLTRCheck {
         if(board[0] === board[4] === board[8] && board[0] === 1){
             pubsub.publish('win1');
         }
         else if(board[0] === board[4] === board[8] && board[0] === 1){
             pubsub.publish('win2');
         }
-    }
-    function diagRTLCheck(){
+    };
+    const diagRTLCheck {
         if(board[2] === board[4] === board[6] && board[2] === 1){
             pubsub.publish('win1');
         }
         else if(board[2] === board[4] === board[6] && board[2] === 1){
             pubsub.publish('win2');
         }
-    }
-};
+    };*/
