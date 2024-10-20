@@ -1,12 +1,19 @@
 var pubsub = require('pubsub.js');
 
-function Player(value){
+function Player(num){
     let score = 0;
+    const value = num;
+    
     const chooseSpot = (spot) => {
         GameBoard.setBoard(spot, value);
     }
+
+    const getScore = () =>{
+        score;
+    };
     return {
-        chooseSpot
+        chooseSpot,
+        getScore
     };
 }
 
@@ -26,17 +33,24 @@ function Game(){
 function GameBoard(){
     const board = [];
     for(let i = 0; i < 9; i++) board.push(0);
-    const _render = () =>{};
+    //const _render = () =>{};
 
     const clearBoard = () =>{
         for(let i = 0; i < 9; i++) board[i] = 0;
     };
 
     const setBoard = (spot, value) =>{
+        board[spot] = value;
     };
 
     const getBoard = () =>{
         board;
+    };
+
+    return{
+        clearBoard,
+        setBoard,
+        getBoard
     };
 }
    /* //Win Checks
