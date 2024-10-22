@@ -3,13 +3,18 @@ var pubsub = require('pubsub.js');
 function Player(num){
     let score = 0;
     const value = num;
-    
+    const name = "Player " + num;
+
     const chooseSpot = (spot) => {
         GameBoard.setBoard(spot, value);
     }
 
     const getScore = () =>{
         score;
+    };
+
+    const getName = () =>{
+        name;
     };
     return {
         chooseSpot,
@@ -18,15 +23,21 @@ function Player(num){
 }
 
 function Game(){
-    pubsub.subscribe('win1', function(){
+    /*pubsub.subscribe('win1', function(){
         console.log("Player 1 wins!");
     });
     pubsub.subscribe('win2', function(){
         console.log("Player 2 wins!");
-    });
+    });*/
+    const player1 = Player(1);
+    const player2 = Player(2);
 
+    const players = [player1, player2];
+    let currentPlayer = players[0];
     const switchPlayer = () => {
-
+        currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
+        let playerTurn = currentPlayer.getName() + 's turn';
+        console.log(playerTurn);
     };
 }
 
