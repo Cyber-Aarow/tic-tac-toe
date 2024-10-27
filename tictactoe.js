@@ -1,4 +1,3 @@
-var pubsub = require('pubsub.js');
 
 function Player(num){
     let score = 0;
@@ -9,16 +8,13 @@ function Player(num){
         GameBoard.setBoard(spot, value);
     }
 
-    const getScore = () =>{
-        score;
-    };
+    const getScore = () => score;
 
-    const getName = () =>{
-        name;
-    };
+    const getName = () => name;
     return {
         chooseSpot,
-        getScore
+        getScore,
+        getName
     };
 }
 
@@ -39,11 +35,16 @@ function Game(){
         let playerTurn = currentPlayer.getName() + 's turn';
         console.log(playerTurn);
     };
+
+    return {
+        switchPlayer
+    };
 }
+const newgame = Game();
 
 function GameBoard(){
     const board = [];
-    for(let i = 0; i < 9; i++) board.push(0);
+    for(let i = 0; i < 9; i++) board[i] = 0;
     //const _render = () =>{};
 
     const clearBoard = () =>{
@@ -52,11 +53,10 @@ function GameBoard(){
 
     const setBoard = (spot, value) =>{
         board[spot] = value;
+        return "You have set " + spot + " to " + value;
     };
 
-    const getBoard = () =>{
-        board;
-    };
+    const getBoard = () => board;
 
     return{
         clearBoard,
@@ -64,6 +64,7 @@ function GameBoard(){
         getBoard
     };
 }
+const gameboard = GameBoard();
    /* //Win Checks
     //Rows
     const rowOneCheck {
