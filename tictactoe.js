@@ -1,4 +1,3 @@
-
 function Player(num){
     let score = 0;
     const value = num;
@@ -25,19 +24,11 @@ function Game(){
     pubsub.subscribe('win2', function(){
         console.log("Player 2 wins!");
     });*/
-    const player1 = Player(1);
-    const player2 = Player(2);
+    const gameboard = GameBoard();
 
-    const players = [player1, player2];
-    let currentPlayer = players[0];
-    const switchPlayer = () => {
-        currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
-        let playerTurn = currentPlayer.getName() + 's turn';
-        console.log(playerTurn);
-    };
-
+    const requestMove = 1;
     return {
-        switchPlayer
+
     };
 }
 const newgame = Game();
@@ -46,6 +37,15 @@ function GameBoard(){
     const board = [];
     for(let i = 0; i < 9; i++) board[i] = 0;
     //const _render = () =>{};
+    const player1 = Player(1);
+    const player2 = Player(2);
+    const players = [player1, player2];
+    let currentPlayer = players[0];
+
+    const switchPlayer = () => {
+        currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
+        return currentPlayer.getName() + "'s turn";
+    };
 
     const clearBoard = () =>{
         for(let i = 0; i < 9; i++) board[i] = 0;
@@ -59,12 +59,12 @@ function GameBoard(){
     const getBoard = () => board;
 
     return{
+        switchPlayer,
         clearBoard,
         setBoard,
         getBoard
     };
 }
-const gameboard = GameBoard();
    /* //Win Checks
     //Rows
     const rowOneCheck {
