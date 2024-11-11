@@ -25,10 +25,21 @@ function Game(){
         console.log("Player 2 wins!");
     });*/
     const gameboard = GameBoard();
-
+ 
     const requestMove = 1;
-    return {
 
+    const printBoard = () => {
+        const board = gameboard.getBoard();
+        const row1 = board[0] + ' ' + board[1] + ' ' + board[2];
+        const row2 = board[3] + ' ' + board[4] + ' ' + board[5];
+        const row3 = board[6] + ' ' + board[7] + ' ' + board[8];
+        console.log(row1);
+        console.log(row2);
+        console.log(row3);
+    };
+
+    return{
+        printBoard
     };
 }
 const newgame = Game();
