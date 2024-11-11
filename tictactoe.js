@@ -47,13 +47,21 @@ function Game(){
     const setChoice = () => {
         gameboard.setBoard(choice, currentPlayer.getValue());
     };
+    const manageChoice = () => {
+        makeChoice();
+        if(gameboard.getBoard()[choice] === 0)
+            setChoice();
+        else{
+            console.log("Already taken. Try again.");
+            manageChoice();
+        }
+    };
     const getChoice = () => choice;
 
     const playRound = () => {
         printBoard();
         switchPlayer();
-        makeChoice();
-        setChoice();
+        manageChoice();
         return "Round played.";
     };
     return{
