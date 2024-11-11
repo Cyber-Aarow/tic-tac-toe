@@ -3,15 +3,13 @@ function Player(num){
     const value = num;
     const name = "Player " + num;
 
-    const chooseSpot = (spot) => {
-        GameBoard.setBoard(spot, value);
-    }
+    const getValue = () => value;
 
     const getScore = () => score;
 
     const getName = () => name;
     return {
-        chooseSpot,
+        getValue,
         getScore,
         getName
     };
@@ -26,20 +24,38 @@ function Game(){
     });*/
     const gameboard = GameBoard();
  
-    const requestMove = 1;
+    const player1 = Player(1);
+    const player2 = Player(2);
+    const players = [player1, player2];
+    let currentPlayer = players[1];
+    let choice;
 
     const printBoard = () => {
         const board = gameboard.getBoard();
         const row1 = board[0] + ' ' + board[1] + ' ' + board[2];
         const row2 = board[3] + ' ' + board[4] + ' ' + board[5];
         const row3 = board[6] + ' ' + board[7] + ' ' + board[8];
-        console.log(row1);
-        console.log(row2);
-        console.log(row3);
+        console.log(row1 + '\n' + row2 + '\n' + row3);
     };
-
+    
+    const switchPlayer = () => {
+        currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
+    };
+    const getChoice = () => {
+        prompt(currentPlayer.getName() + "'s turn");
+    };
+    const setChoice = () => {
+        gameboard.setBoard(choice, currentPlayer.getValue());
+    };
+    const playRound = () => {
+        printBoard();
+        switchPlayer();
+        choice = getChoice();
+        setChoice();
+        return "Round played."
+    };
     return{
-        printBoard
+        playRound
     };
 }
 const newgame = Game();
@@ -48,15 +64,7 @@ function GameBoard(){
     const board = [];
     for(let i = 0; i < 9; i++) board[i] = 0;
     //const _render = () =>{};
-    const player1 = Player(1);
-    const player2 = Player(2);
-    const players = [player1, player2];
-    let currentPlayer = players[0];
 
-    const switchPlayer = () => {
-        currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
-        return currentPlayer.getName() + "'s turn";
-    };
 
     const clearBoard = () =>{
         for(let i = 0; i < 9; i++) board[i] = 0;
@@ -70,7 +78,6 @@ function GameBoard(){
     const getBoard = () => board;
 
     return{
-        switchPlayer,
         clearBoard,
         setBoard,
         getBoard
