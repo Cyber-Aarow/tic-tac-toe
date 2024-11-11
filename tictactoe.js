@@ -28,7 +28,7 @@ function Game(){
     const player2 = Player(2);
     const players = [player1, player2];
     let currentPlayer = players[1];
-    let choice;
+    let choice = 0;
 
     const printBoard = () => {
         const board = gameboard.getBoard();
@@ -41,24 +41,27 @@ function Game(){
     const switchPlayer = () => {
         currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
     };
-    const getChoice = () => {
-        prompt(currentPlayer.getName() + "'s turn");
+    const makeChoice = () => {
+        choice = prompt(currentPlayer.getName() + "'s turn");
     };
     const setChoice = () => {
         gameboard.setBoard(choice, currentPlayer.getValue());
     };
+    const getChoice = () => choice;
+
     const playRound = () => {
         printBoard();
         switchPlayer();
-        choice = getChoice();
+        makeChoice();
         setChoice();
-        return "Round played."
+        return "Round played.";
     };
     return{
+        printBoard,
+        getChoice,
         playRound
     };
 }
-const newgame = Game();
 
 function GameBoard(){
     const board = [];
@@ -82,7 +85,7 @@ function GameBoard(){
         setBoard,
         getBoard
     };
-}
+}const newgame = Game();
    /* //Win Checks
     //Rows
     const rowOneCheck {
