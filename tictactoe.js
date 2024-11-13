@@ -1,3 +1,5 @@
+let pubsub = require('node_modules/pubsub.js');
+
 function Player(num){
     let score = 0;
     const value = num;
@@ -16,12 +18,12 @@ function Player(num){
 }
 
 function Game(){
-    /*pubsub.subscribe('win1', function(){
+    pubsub.subscribe('win1', function(){
         console.log("Player 1 wins!");
     });
     pubsub.subscribe('win2', function(){
         console.log("Player 2 wins!");
-    });*/
+    });
     const gameboard = GameBoard();
  
     const player1 = Player(1);
@@ -94,9 +96,9 @@ function GameBoard(){
         getBoard
     };
 }const newgame = Game();
-   /* //Win Checks
+    //Win Checks
     //Rows
-    const rowOneCheck {
+    const rowOneCheck = () => {
         if(board[0] === board[1] === board[2] && board[0] === 1){
             pubsub.publish('win1');
         }
@@ -104,7 +106,7 @@ function GameBoard(){
             pubsub.publish('win2');
         }
     };
-    const rowTwoCheck {
+    const rowTwoCheck = () => {
         if(board[3] === board[4] === board[5] && board[3] === 1){
             pubsub.publish('win1');
         }
@@ -112,7 +114,7 @@ function GameBoard(){
             pubsub.publish('win2');
         }
     };
-    const rowThreeCheck {
+    const rowThreeCheck = () => {
         if(board[6] === board[7] === board[8] && board[6] === 1){
             pubsub.publish('win1');
         }
@@ -121,7 +123,7 @@ function GameBoard(){
         }
     };
     //Columns
-    const colOneCheck {
+    const colOneCheck = () => {
         if(board[0] === board[3] === board[6] && board[0] === 1){
             pubsub.publish('win1');
         }
@@ -129,7 +131,7 @@ function GameBoard(){
             pubsub.publish('win2');
         }
     };
-    const colTwoCheck {
+    const colTwoCheck = () => {
         if(board[1] === board[4] === board[7] && board[1] === 1){
             pubsub.publish('win1');
         }
@@ -137,7 +139,7 @@ function GameBoard(){
             pubsub.publish('win2');
         }
     };
-    const colThreeCheck {
+    const colThreeCheck = () => {
         if(board[2] === board[5] === board[8] && board[2] === 1){
             pubsub.publish('win1');
         }
@@ -146,7 +148,7 @@ function GameBoard(){
         }
     };
     //Diagonals
-    const diagLTRCheck {
+    const diagLTRCheck = () => {
         if(board[0] === board[4] === board[8] && board[0] === 1){
             pubsub.publish('win1');
         }
@@ -154,11 +156,11 @@ function GameBoard(){
             pubsub.publish('win2');
         }
     };
-    const diagRTLCheck {
+    const diagRTLCheck = () => {
         if(board[2] === board[4] === board[6] && board[2] === 1){
             pubsub.publish('win1');
         }
         else if(board[2] === board[4] === board[6] && board[2] === 1){
             pubsub.publish('win2');
         }
-    };*/
+    };
