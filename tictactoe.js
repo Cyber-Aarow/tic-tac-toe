@@ -1,5 +1,4 @@
-let pubsub = require('node_modules/pubsub.js');
-
+//let pubsub = require('pubsub.js');
 function Player(num){
     let score = 0;
     const value = num;
@@ -18,22 +17,17 @@ function Player(num){
 }
 
 function Game(){
-    pubsub.subscribe('win1', function(){
-        console.log("Player 1 wins!");
-    });
-    pubsub.subscribe('win2', function(){
-        console.log("Player 2 wins!");
-    });
-    const gameboard = GameBoard();
- 
+    const gameBoard = GameBoard();
+    const winCheck = WinCheck(gameBoard);
     const player1 = Player(1);
     const player2 = Player(2);
     const players = [player1, player2];
     let currentPlayer = players[1];
     let choice = 0;
+    
 
     const printBoard = () => {
-        const board = gameboard.getBoard();
+        const board = gameBoard.getBoard();
         const row1 = board[0] + ' ' + board[1] + ' ' + board[2];
         const row2 = board[3] + ' ' + board[4] + ' ' + board[5];
         const row3 = board[6] + ' ' + board[7] + ' ' + board[8];
@@ -47,11 +41,11 @@ function Game(){
         choice = prompt(currentPlayer.getName() + "'s turn");
     };
     const setChoice = () => {
-        gameboard.setBoard(choice, currentPlayer.getValue());
+        gameBoard.setBoard(choice, currentPlayer.getValue());
     };
     const manageChoice = () => {
         makeChoice();
-        if(gameboard.getBoard()[choice] === 0)
+        if(gameBoard.getBoard()[choice] === 0)
             setChoice();
         else{
             console.log("Already taken. Try again.");
@@ -64,6 +58,7 @@ function Game(){
         printBoard();
         switchPlayer();
         manageChoice();
+        winCheck.runCheck();
         return "Round played.";
     };
     return{
@@ -95,72 +90,95 @@ function GameBoard(){
         setBoard,
         getBoard
     };
-}const newgame = Game();
-    //Win Checks
+}
+const game = Game();
+    
+
+function WinCheck(board){
+    let win1 = false;
+    let win2 = false;
+    const runCheck = () =>{
+        rowOneCheck();
+        rowTwoCheck();
+        rowThreeCheck();
+        colOneCheck();
+        colTwoCheck();
+        colThreeCheck();
+        diagLTRCheck();
+        diagRTLCheck();
+
+        if(win1) return 1;
+        else if(win2) return 2;
+        else return 0;
+    };
     //Rows
     const rowOneCheck = () => {
         if(board[0] === board[1] === board[2] && board[0] === 1){
-            pubsub.publish('win1');
+            win1 = true;
         }
         else if(board[0] === board[1] === board[2] && board[0] === 1){
-            pubsub.publish('win2');
+            win2 = true;
         }
     };
     const rowTwoCheck = () => {
         if(board[3] === board[4] === board[5] && board[3] === 1){
-            pubsub.publish('win1');
+            win1 = true;
         }
         else if(board[3] === board[4] === board[5] && board[3] === 1){
-            pubsub.publish('win2');
+            win2 = true;
         }
     };
     const rowThreeCheck = () => {
         if(board[6] === board[7] === board[8] && board[6] === 1){
-            pubsub.publish('win1');
+            win1 = true;
         }
         else if(board[6] === board[7] === board[8] && board[6] === 1){
-            pubsub.publish('win2');
+            win2 = true;
         }
     };
     //Columns
     const colOneCheck = () => {
         if(board[0] === board[3] === board[6] && board[0] === 1){
-            pubsub.publish('win1');
+            win1 = true;
         }
         else if(board[0] === board[3] === board[6] && board[0] === 1){
-            pubsub.publish('win2');
+            win2 = true;
         }
     };
     const colTwoCheck = () => {
         if(board[1] === board[4] === board[7] && board[1] === 1){
-            pubsub.publish('win1');
+            win1 = true;
         }
         else if(board[1] === board[4] === board[7] && board[1] === 1){
-            pubsub.publish('win2');
+            win2 = true;
         }
     };
     const colThreeCheck = () => {
         if(board[2] === board[5] === board[8] && board[2] === 1){
-            pubsub.publish('win1');
+            win1 = true;
         }
         else if(board[2] === board[5] === board[8] && board[2] === 1){
-            pubsub.publish('win2');
+            win2 = true;
         }
     };
     //Diagonals
     const diagLTRCheck = () => {
         if(board[0] === board[4] === board[8] && board[0] === 1){
-            pubsub.publish('win1');
+            win1 = true;
         }
         else if(board[0] === board[4] === board[8] && board[0] === 1){
-            pubsub.publish('win2');
+            win2 = true;
         }
     };
     const diagRTLCheck = () => {
         if(board[2] === board[4] === board[6] && board[2] === 1){
-            pubsub.publish('win1');
+            win1 = true;
         }
         else if(board[2] === board[4] === board[6] && board[2] === 1){
-            pubsub.publish('win2');
+            win2 = true;
         }
     };
+    return{
+        runCheck
+    };
+}
