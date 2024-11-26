@@ -18,14 +18,22 @@ function Player(num){
 
 function Game(){
     const gameBoard = GameBoard();
-    const winCheck = WinCheck(gameBoard);
     const player1 = Player(1);
     const player2 = Player(2);
     const players = [player1, player2];
     let currentPlayer = players[1];
     let choice = 0;
-    
+    let win = 0;
 
+    const playRound = () => {
+        printBoard();
+        switchPlayer();
+        manageChoice();
+        win = winCheck();
+        if(win === 0) return "Round played.";
+        else if(win === 1) return "Player 1 wins!";
+        else if(win === 2) return "Player 2 wins!";
+    };
     const printBoard = () => {
         const board = gameBoard.getBoard();
         const row1 = board[0] + ' ' + board[1] + ' ' + board[2];
@@ -52,18 +60,100 @@ function Game(){
             manageChoice();
         }
     };
-    const getChoice = () => choice;
+    function winCheck(){
+        console.log("winCheck Active");
+        const board = gameBoard.getBoard();
+        let win1 = false;
+        let win2 = false;
+        const runCheck = () => {
+            console.log("runCheck Active");
+            rowOneCheck();
+            rowTwoCheck();
+            rowThreeCheck();
+            colOneCheck();
+            colTwoCheck();
+            colThreeCheck();
+            diagLTRCheck();
+            diagRTLCheck();
+            console.log(win1);
+            console.log(board[0] + board[1] + board[2]);
+            if(win1) return 1;
+            else if(win2) return 2;
+            else return 0;
+        };
 
-    const playRound = () => {
-        printBoard();
-        switchPlayer();
-        manageChoice();
-        winCheck.runCheck();
-        return "Round played.";
-    };
+        //Rows
+        const rowOneCheck = () => {
+            if(board[0] === board[1] === board[2] && board[0] === 1){
+                win1 = true;
+            }
+            else if(board[0] === board[1] === board[2] && board[0] === 1){
+                win2 = true;
+            }
+        };
+        const rowTwoCheck = () => {
+            if(board[3] === board[4] === board[5] && board[3] === 1){
+                win1 = true;
+            }
+            else if(board[3] === board[4] === board[5] && board[3] === 1){
+                win2 = true;
+            }
+        };
+        const rowThreeCheck = () => {
+            if(board[6] === board[7] === board[8] && board[6] === 1){
+                win1 = true;
+            }
+            else if(board[6] === board[7] === board[8] && board[6] === 1){
+                win2 = true;
+            }
+        };
+        //Columns
+        const colOneCheck = () => {
+            if(board[0] === board[3] === board[6] && board[0] === 1){
+                win1 = true;
+            }
+            else if(board[0] === board[3] === board[6] && board[0] === 1){
+                win2 = true;
+            }
+        };
+        const colTwoCheck = () => {
+            if(board[1] === board[4] === board[7] && board[1] === 1){
+                win1 = true;
+            }
+            else if(board[1] === board[4] === board[7] && board[1] === 1){
+                win2 = true;
+            }
+        };
+        const colThreeCheck = () => {
+            if(board[2] === board[5] === board[8] && board[2] === 1){
+                win1 = true;
+            }
+            else if(board[2] === board[5] === board[8] && board[2] === 1){
+                win2 = true;
+            }
+        };
+        //Diagonals
+        const diagLTRCheck = () => {
+            if(board[0] === board[4] === board[8] && board[0] === 1){
+                win1 = true;
+            }
+            else if(board[0] === board[4] === board[8] && board[0] === 1){
+                win2 = true;
+            }
+        };
+        const diagRTLCheck = () => {
+            if(board[2] === board[4] === board[6] && board[2] === 1){
+                win1 = true;
+            }
+            else if(board[2] === board[4] === board[6] && board[2] === 1){
+                win2 = true;
+            }
+        };
+        return runCheck();
+    }
+
     return{
         printBoard,
-        getChoice,
         playRound
     };
 }
@@ -94,91 +184,3 @@ function GameBoard(){
 const game = Game();
     
 
-function WinCheck(board){
-    let win1 = false;
-    let win2 = false;
-    const runCheck = () =>{
-        rowOneCheck();
-        rowTwoCheck();
-        rowThreeCheck();
-        colOneCheck();
-        colTwoCheck();
-        colThreeCheck();
-        diagLTRCheck();
-        diagRTLCheck();
-
-        if(win1) return 1;
-        else if(win2) return 2;
-        else return 0;
-    };
-    //Rows
-    const rowOneCheck = () => {
-        if(board[0] === board[1] === board[2] && board[0] === 1){
-            win1 = true;
-        }
-        else if(board[0] === board[1] === board[2] && board[0] === 1){
-            win2 = true;
-        }
-    };
-    const rowTwoCheck = () => {
-        if(board[3] === board[4] === board[5] && board[3] === 1){
-            win1 = true;
-        }
-        else if(board[3] === board[4] === board[5] && board[3] === 1){
-            win2 = true;
-        }
-    };
-    const rowThreeCheck = () => {
-        if(board[6] === board[7] === board[8] && board[6] === 1){
-            win1 = true;
-        }
-        else if(board[6] === board[7] === board[8] && board[6] === 1){
-            win2 = true;
-        }
-    };
-    //Columns
-    const colOneCheck = () => {
-        if(board[0] === board[3] === board[6] && board[0] === 1){
-            win1 = true;
-        }
-        else if(board[0] === board[3] === board[6] && board[0] === 1){
-            win2 = true;
-        }
-    };
-    const colTwoCheck = () => {
-        if(board[1] === board[4] === board[7] && board[1] === 1){
-            win1 = true;
-        }
-        else if(board[1] === board[4] === board[7] && board[1] === 1){
-            win2 = true;
-        }
-    };
-    const colThreeCheck = () => {
-        if(board[2] === board[5] === board[8] && board[2] === 1){
-            win1 = true;
-        }
-        else if(board[2] === board[5] === board[8] && board[2] === 1){
-            win2 = true;
-        }
-    };
-    //Diagonals
-    const diagLTRCheck = () => {
-        if(board[0] === board[4] === board[8] && board[0] === 1){
-            win1 = true;
-        }
-        else if(board[0] === board[4] === board[8] && board[0] === 1){
-            win2 = true;
-        }
-    };
-    const diagRTLCheck = () => {
-        if(board[2] === board[4] === board[6] && board[2] === 1){
-            win1 = true;
-        }
-        else if(board[2] === board[4] === board[6] && board[2] === 1){
-            win2 = true;
-        }
-    };
-    return{
-        runCheck
-    };
-}
