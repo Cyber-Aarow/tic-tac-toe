@@ -25,15 +25,18 @@ function Game(){
     let choice = 0;
     let win = 0;
 
+    const getWin = () => win;
     const playRound = () => {
         printBoard();
         switchPlayer();
         manageChoice();
         win = winCheck();
+        console.log(win);
         if(win === 0) return "Round played.";
         else if(win === 1) return "Player 1 wins!";
         else if(win === 2) return "Player 2 wins!";
     };
+
     const printBoard = () => {
         const board = gameBoard.getBoard();
         const row1 = board[0] + ' ' + board[1] + ' ' + board[2];
@@ -61,12 +64,10 @@ function Game(){
         }
     };
     function winCheck(){
-        console.log("winCheck Active");
         const board = gameBoard.getBoard();
         let win1 = false;
         let win2 = false;
         const runCheck = () => {
-            console.log("runCheck Active");
             rowOneCheck();
             rowTwoCheck();
             rowThreeCheck();
@@ -75,8 +76,6 @@ function Game(){
             colThreeCheck();
             diagLTRCheck();
             diagRTLCheck();
-            console.log(win1);
-            console.log(board[0] + board[1] + board[2]);
             if(win1) return 1;
             else if(win2) return 2;
             else return 0;
@@ -154,7 +153,8 @@ function Game(){
 
     return{
         printBoard,
-        playRound
+        playRound,
+        getWin
     };
 }
 
@@ -182,5 +182,5 @@ function GameBoard(){
     };
 }
 const game = Game();
-    
+while(game.getWin() === 0) game.playRound();
 
