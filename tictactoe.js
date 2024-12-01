@@ -16,8 +16,31 @@ function Player(num){
     };
 }
 
-function Game(){
-    const gameBoard = GameBoard();
+const GameBoard = (() => {
+    const board = [];
+    for(let i = 0; i < 9; i++) board[i] = 0;
+    //const _render = () =>{};
+
+
+    const clearBoard = () =>{
+        for(let i = 0; i < 9; i++) board[i] = 0;
+    };
+
+    const setBoard = (spot, value) =>{
+        board[spot] = value;
+        return "You have set " + spot + " to " + value;
+    };
+
+    const getBoard = () => board;
+
+    return{
+        clearBoard,
+        setBoard,
+        getBoard
+    };
+})();
+
+const Game = (() =>{
     const player1 = Player(1);
     const player2 = Player(2);
     const players = [player1, player2];
@@ -39,7 +62,7 @@ function Game(){
     };
 
     const printBoard = () => {
-        const board = gameBoard.getBoard();
+        const board = GameBoard.getBoard();
         const row1 = board[0] + ' ' + board[1] + ' ' + board[2];
         const row2 = board[3] + ' ' + board[4] + ' ' + board[5];
         const row3 = board[6] + ' ' + board[7] + ' ' + board[8];
@@ -53,12 +76,12 @@ function Game(){
         choice = prompt(currentPlayer.getName() + "'s turn");
     };
     const setChoice = () => {
-        gameBoard.setBoard(choice, currentPlayer.getValue());
+        GameBoard.setBoard(choice, currentPlayer.getValue());
     };
     const manageChoice = () => {
         makeChoice();
         
-        if(gameBoard.getBoard()[choice] === 0)
+        if(GameBoard.getBoard()[choice] === 0)
             setChoice();
         else{
             console.log("Already taken or not an option. Try again.");
@@ -66,7 +89,7 @@ function Game(){
         }
     };
     function winCheck(){
-        const board = gameBoard.getBoard();
+        const board = GameBoard.getBoard();
         let win1 = false;
         let win2 = false;
         const runCheck = () => {
@@ -158,33 +181,10 @@ function Game(){
         playRound,
         getWin
     };
-}
+})();
 
-function GameBoard(){
-    const board = [];
-    for(let i = 0; i < 9; i++) board[i] = 0;
-    //const _render = () =>{};
-
-
-    const clearBoard = () =>{
-        for(let i = 0; i < 9; i++) board[i] = 0;
-    };
-
-    const setBoard = (spot, value) =>{
-        board[spot] = value;
-        return "You have set " + spot + " to " + value;
-    };
-
-    const getBoard = () => board;
-
-    return{
-        clearBoard,
-        setBoard,
-        getBoard
-    };
-}
-const game = Game();
-while(game.getWin() === 0){
-    console.log(game.playRound());
+//Global code
+while(Game.getWin() === 0){
+    console.log(Game.playRound());
 }
 
