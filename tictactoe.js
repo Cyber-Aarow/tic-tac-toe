@@ -26,6 +26,7 @@ function Game(){
     let win = 0;
 
     const getWin = () => win;
+
     const playRound = () => {
         printBoard();
         switchPlayer();
@@ -56,10 +57,11 @@ function Game(){
     };
     const manageChoice = () => {
         makeChoice();
+        
         if(gameBoard.getBoard()[choice] === 0)
             setChoice();
         else{
-            console.log("Already taken. Try again.");
+            console.log("Already taken or not an option. Try again.");
             manageChoice();
         }
     };
@@ -86,7 +88,7 @@ function Game(){
             if((board[0] === board[1]) && (board[0] === board[2]) && (board[0] === 1)){
                 win1 = true;
             }
-            else if((board[0] === board[1]) && (board[0] === board[2]) && (board[0] === 1)){
+            else if((board[0] === board[1]) && (board[0] === board[2]) && (board[0] === 2)){
                 win2 = true;
             }
         };
@@ -94,7 +96,7 @@ function Game(){
             if((board[3] === board[4]) && (board[3] === board[5]) && (board[3] === 1)){
                 win1 = true;
             }
-            else if((board[3] === board[4]) && (board[3] === board[5]) && (board[3] === 1)){
+            else if((board[3] === board[4]) && (board[3] === board[5]) && (board[3] === 2)){
                 win2 = true;
             }
         };
@@ -102,7 +104,7 @@ function Game(){
             if((board[6] === board[7]) && (board[6] === board[8]) && (board[6] === 1)){
                 win1 = true;
             }
-            else if((board[6] === board[7]) && (board[6] === board[8]) && (board[6] === 1)){
+            else if((board[6] === board[7]) && (board[6] === board[8]) && (board[6] === 2)){
                 win2 = true;
             }
         };
@@ -111,7 +113,7 @@ function Game(){
             if((board[0] === board[3]) && (board[0] === board[6]) && (board[0] === 1)){
                 win1 = true;
             }
-            else if((board[0] === board[3]) && (board[0] === board[6]) && (board[0] === 1)){
+            else if((board[0] === board[3]) && (board[0] === board[6]) && (board[0] === 2)){
                 win2 = true;
             }
         };
@@ -119,7 +121,7 @@ function Game(){
             if((board[1] === board[4]) && (board[1] === board[7]) && (board[1] === 1)){
                 win1 = true;
             }
-            else if((board[1] === board[4]) && (board[1] === board[7]) && (board[1] === 1)){
+            else if((board[1] === board[4]) && (board[1] === board[7]) && (board[1] === 2)){
                 win2 = true;
             }
         };
@@ -127,7 +129,7 @@ function Game(){
             if((board[2] === board[5]) && (board[2] === board[8]) && (board[2] === 1)){
                 win1 = true;
             }
-            else if((board[2] === board[5]) && (board[2] === board[8]) && (board[2] === 1)){
+            else if((board[2] === board[5]) && (board[2] === board[8]) && (board[2] === 2)){
                 win2 = true;
             }
         };
@@ -136,7 +138,7 @@ function Game(){
             if((board[0] === board[4]) && (board[0] === board[8]) && (board[0] === 1)){
                 win1 = true;
             }
-            else if((board[0] === board[4]) && (board[0] === board[8]) && (board[0] === 1)){
+            else if((board[0] === board[4]) && (board[0] === board[8]) && (board[0] === 2)){
                 win2 = true;
             }
         };
@@ -144,7 +146,7 @@ function Game(){
             if((board[2] === board[4]) && (board[2] === board[6]) && (board[2] === 1)){
                 win1 = true;
             }
-            else if((board[2] === board[4]) && (board[2] === board[6]) && (board[2] === 1)){
+            else if((board[2] === board[4]) && (board[2] === board[6]) && (board[2] === 2)){
                 win2 = true;
             }
         };
@@ -182,5 +184,7 @@ function GameBoard(){
     };
 }
 const game = Game();
-while(game.getWin() === 0) game.playRound();
+while(game.getWin() === 0){
+    console.log(game.playRound());
+}
 
