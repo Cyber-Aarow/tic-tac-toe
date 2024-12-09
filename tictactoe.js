@@ -47,8 +47,11 @@ const Game = (() =>{
     let currentPlayer = players[1];
     let choice = 0;
     let win = 0;
+    let move_count = 0;
+    let tie = false;
 
     const getWin = () => win;
+    const getTie = () => tie;
 
     const playRound = () => {
         printBoard();
@@ -56,7 +59,14 @@ const Game = (() =>{
         manageChoice();
         win = winCheck();
         console.log(win);
-        if(win === 0) return "Round played.";
+        move_count++;
+        if(win === 0){
+            if(move_count === 9){
+                tie = true;
+                return "It's a tie!";
+            }
+            return "Round played.";
+        }
         else if(win === 1) return "Player 1 wins!";
         else if(win === 2) return "Player 2 wins!";
     };
@@ -179,12 +189,13 @@ const Game = (() =>{
     return{
         printBoard,
         playRound,
-        getWin
+        getWin,
+        getTie
     };
 })();
 
 //Global code
-while(Game.getWin() === 0){
+while(Game.getWin() === 0 && Game.getTie() === false){
     console.log(Game.playRound());
 }
 
