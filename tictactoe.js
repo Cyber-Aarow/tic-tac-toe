@@ -218,6 +218,7 @@ const DOM = (() => {
             ul.appendChild(li);
         }
         const body = document.querySelector('body');
+        body.innerHTML = '';
         body.appendChild(ul);
     };
 
@@ -228,8 +229,8 @@ const DOM = (() => {
 
 //Global code
 DOM.displayBoard();
-/*while(Game.getWin() === 0 && Game.getTie() === false){
+while(Game.getWin() === 0 && Game.getTie() === false){
     console.log(Game.playRound());
     DOM.displayBoard();
 }
-*/
+
