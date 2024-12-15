@@ -1,5 +1,5 @@
-//let pubsub = require('pubsub.js');
-function Player(num){
+
+/*function Player(num){
     let score = 0;
     const value = num;
     const name = "Player " + num;
@@ -193,9 +193,21 @@ const Game = (() =>{
         getTie
     };
 })();
+ 
+const DOM = (() => {
+    
+    const displayBoard = () => {
+        const board = GameBoard.getBoard();
+        for(let i = 0; i < board.size; i++){
+            if(board[i] === 1){}
+            else if(board[i] === 2){} 
+        }
+    };
+}());
 
 //Global code
 while(Game.getWin() === 0 && Game.getTie() === false){
     console.log(Game.playRound());
 }
 
+*/
