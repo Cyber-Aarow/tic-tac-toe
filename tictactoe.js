@@ -1,5 +1,5 @@
 
-/*function Player(num){
+function Player(num){
     let score = 0;
     const value = num;
     const name = "Player " + num;
@@ -198,16 +198,36 @@ const DOM = (() => {
     
     const displayBoard = () => {
         const board = GameBoard.getBoard();
-        for(let i = 0; i < board.size; i++){
-            if(board[i] === 1){}
-            else if(board[i] === 2){} 
+        const ul = document.createElement('ul');
+        ul.classList.add('gameboard');
+        for(let i = 0; i < board.length; i++){
+            const li = document.createElement('li');
+            li.classList.add('tile');
+            if(board[i] === 0){
+                li.innerHTML = '#';
+                //li.style.opacity = '0';
+            }
+            else if(board[i] === 1){
+                li.innerHTML = 'X';
+            }
+            else if(board[i] === 2){
+                li.innerHTML = 'O';
+            }
+            ul.appendChild(li);
         }
+        const body = document.querySelector('body');
+        body.appendChild(ul);
     };
-}());
+
+    return{
+        displayBoard
+    };
+})();
 
 //Global code
-while(Game.getWin() === 0 && Game.getTie() === false){
+DOM.displayBoard();
+/*while(Game.getWin() === 0 && Game.getTie() === false){
     console.log(Game.playRound());
+    DOM.displayBoard();
 }
-
 */
