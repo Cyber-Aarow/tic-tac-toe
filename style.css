@@ -26,11 +26,13 @@ body{
 
 .tile {
     display: block;
-    font-size: clamp(15px, 10vh, 100px);
+    font-size: clamp(15px, 20vh, 200px);
     text-align: center;
     font-weight: bolder;
+    font-family: 'Journal', cursive, sans-serif;
     width: fit-content;
     aspect-ratio: 1;
     background-color: white;
+    color: rgb(94, 13, 13);
     padding: 2vh;
 }
