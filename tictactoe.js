@@ -202,17 +202,19 @@ const DOM = (() => {
         ul.classList.add('gameboard');
         for(let i = 0; i < board.length; i++){
             const li = document.createElement('li');
+            const p = document.createElement('p');
             li.classList.add('tile');
             if(board[i] === 0){
-                li.innerHTML = '#';
-                //li.style.opacity = '0';
+                p.innerHTML = '#';
+                p.style.opacity = '0';
             }
             else if(board[i] === 1){
-                li.innerHTML = 'X';
+                p.innerHTML = 'X';
             }
             else if(board[i] === 2){
-                li.innerHTML = 'O';
+                p.innerHTML = 'O';
             }
+            li.appendChild(p);
             ul.appendChild(li);
         }
         const body = document.querySelector('body');
