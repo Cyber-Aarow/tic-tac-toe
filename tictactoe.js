@@ -58,7 +58,6 @@ const Game = (() =>{
         switchPlayer();
         manageChoice();
         win = winCheck();
-        console.log(win);
         move_count++;
         if(win === 0){
             if(move_count === 9){
@@ -196,25 +195,29 @@ const Game = (() =>{
  
 const DOM = (() => {
     
+    const chooseLetter = (number) => {
+        const p = document.createElement('p');
+        if(number === 0){
+            p.innerHTML = '#';
+            p.style.opacity = '0';
+        }
+        else if(number === 1){
+            p.innerHTML = 'X';
+        }
+        else if(number === 2){
+            p.innerHTML = 'O';
+        }
+        return p;
+    };
+
     const displayBoard = () => {
         const board = GameBoard.getBoard();
         const ul = document.createElement('ul');
         ul.classList.add('gameboard');
         for(let i = 0; i < board.length; i++){
             const li = document.createElement('li');
-            const p = document.createElement('p');
             li.classList.add('tile');
-            if(board[i] === 0){
-                p.innerHTML = '#';
-                p.style.opacity = '0';
-            }
-            else if(board[i] === 1){
-                p.innerHTML = 'X';
-            }
-            else if(board[i] === 2){
-                p.innerHTML = 'O';
-            }
-            li.appendChild(p);
+            li.appendChild(chooseLetter(board[i]));
             ul.appendChild(li);
         }
         const body = document.querySelector('body');
