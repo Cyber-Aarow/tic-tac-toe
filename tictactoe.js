@@ -54,8 +54,9 @@ const Game = (() =>{
     const getTie = () => tie;
 
     const playRound = (number) => {
-        printBoard();
+        console.log(currentPlayer.getName() + "'s turn");
         manageChoice(number);
+        printBoard();
         win = winCheck();
         if(win === 0){
             if(move_count === 9){
@@ -79,15 +80,12 @@ const Game = (() =>{
     const switchPlayer = () => {
         currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
     };
-    const makeChoice = (number) => {
-        console.log(currentPlayer.getName() + "'s turn");
-        choice = number;
-    };
+
     const setChoice = () => {
         GameBoard.setBoard(choice, currentPlayer.getValue());
     };
     const manageChoice = (number) => {
-        makeChoice(number);
+        choice = number;
         
         if(GameBoard.getBoard()[choice] === 0){
             setChoice();
