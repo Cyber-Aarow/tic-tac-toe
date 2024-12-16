@@ -35,4 +35,5 @@ body{
     background-color: white;
     color: rgb(94, 13, 13);
     padding: 2vh;
+    cursor: pointer;
 }

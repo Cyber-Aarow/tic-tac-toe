@@ -81,8 +81,9 @@ const Game = (() =>{
     const switchPlayer = () => {
         currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
     };
-    const makeChoice = () => {
-        choice = prompt(currentPlayer.getName() + "'s turn");
+    const makeChoice = (number) => {
+        console.log(currentPlayer.getName() + "'s turn");
+        choice = number;
     };
     const setChoice = () => {
         GameBoard.setBoard(choice, currentPlayer.getValue());
@@ -189,7 +190,8 @@ const Game = (() =>{
         printBoard,
         playRound,
         getWin,
-        getTie
+        getTie,
+        makeChoice
     };
 })();
  
@@ -210,6 +212,12 @@ const DOM = (() => {
         return p;
     };
 
+    const giveClick = (tile, number) => {
+        tile.addEventListener('click', function(){
+            Game.makeChoice(number);
+        });       
+    }
+
     const displayBoard = () => {
         const board = GameBoard.getBoard();
         const ul = document.createElement('ul');
@@ -217,6 +225,8 @@ const DOM = (() => {
         for(let i = 0; i < board.length; i++){
             const li = document.createElement('li');
             li.classList.add('tile');
+            li.classList.add('t' + i.toString());
+            giveClick(li, i);
             li.appendChild(chooseLetter(board[i]));
             ul.appendChild(li);
         }
