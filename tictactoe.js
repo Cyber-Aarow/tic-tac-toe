@@ -57,6 +57,7 @@ const Game = (() =>{
         printBoard();
         manageChoice(number);
         win = winCheck();
+        console.log(win);
         if(win === 0){
             if(move_count === 9){
                 tie = true;
@@ -94,6 +95,7 @@ const Game = (() =>{
             switchPlayer();
             DOM.displayBoard();
             move_count++;
+            console.log("Move count: " + move_count);
         }
         else{
             console.log("Already taken. Try again.");
@@ -215,7 +217,7 @@ const DOM = (() => {
 
     const giveClick = (tile, number) => {
         tile.addEventListener('click', function(){
-            Game.playRound(number);
+            console.log(Game.playRound(number));
         });       
     }
 
