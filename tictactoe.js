@@ -57,8 +57,6 @@ const Game = (() =>{
         printBoard();
         manageChoice(number);
         win = winCheck();
-        move_count++;
-        switchPlayer();
         if(win === 0){
             if(move_count === 9){
                 tie = true;
@@ -91,11 +89,14 @@ const Game = (() =>{
     const manageChoice = (number) => {
         makeChoice(number);
         
-        if(GameBoard.getBoard()[choice] === 0)
+        if(GameBoard.getBoard()[choice] === 0){
             setChoice();
+            switchPlayer();
+            DOM.displayBoard();
+            move_count++;
+        }
         else{
-            console.log("Already taken or not an option. Try again.");
-            manageChoice();
+            console.log("Already taken. Try again.");
         }
     };
     function winCheck(){
@@ -242,8 +243,4 @@ const DOM = (() => {
 
 //Global code
 DOM.displayBoard();
-while(Game.getWin() === 0 && Game.getTie() === false){
-    console.log(Game.playRound());
-    DOM.displayBoard();
-}
 
