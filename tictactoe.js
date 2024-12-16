@@ -5,13 +5,14 @@ function Player(num){
     const name = "Player " + num;
 
     const getValue = () => value;
-
+    const addScore = () => score++;
     const getScore = () => score;
 
     const getName = () => name;
     return {
         getValue,
         getScore,
+        addScore,
         getName
     };
 }
@@ -58,15 +59,7 @@ const Game = (() =>{
         manageChoice(number);
         printBoard();
         win = winCheck();
-        if(win === 0){
-            if(move_count === 9){
-                tie = true;
-                return "It's a tie!";
-            }
-            return "Round played.";
-        }
-        else if(win === 1) return "Player 1 wins!";
-        else if(win === 2) return "Player 2 wins!";
+        return handleWin();
     };
 
     const printBoard = () => {
@@ -97,6 +90,7 @@ const Game = (() =>{
             console.log("Already taken. Try again.");
         }
     };
+
     function winCheck(){
         const board = GameBoard.getBoard();
         let win1 = false;
@@ -185,6 +179,23 @@ const Game = (() =>{
         return runCheck();
     }
 
+    const handleWin = () => {
+        if(win === 0){
+            if(move_count === 9){
+                tie = true;
+                return "It's a tie!";
+            }
+            return "Round played.";
+        }
+        else if(win === 1) {
+            player1.addScore();
+            return "Player 1 wins!";
+        }
+        else if(win === 2) {
+            player2.addScore();
+            return "Player 2 wins!";
+        }
+    };
     return{
         printBoard,
         playRound,
