@@ -44,7 +44,7 @@ const Game = (() =>{
     const player1 = Player(1);
     const player2 = Player(2);
     const players = [player1, player2];
-    let currentPlayer = players[1];
+    let currentPlayer = players[0];
     let choice = 0;
     let win = 0;
     let move_count = 0;
@@ -53,12 +53,12 @@ const Game = (() =>{
     const getWin = () => win;
     const getTie = () => tie;
 
-    const playRound = () => {
+    const playRound = (number) => {
         printBoard();
-        switchPlayer();
-        manageChoice();
+        manageChoice(number);
         win = winCheck();
         move_count++;
+        switchPlayer();
         if(win === 0){
             if(move_count === 9){
                 tie = true;
@@ -88,8 +88,8 @@ const Game = (() =>{
     const setChoice = () => {
         GameBoard.setBoard(choice, currentPlayer.getValue());
     };
-    const manageChoice = () => {
-        makeChoice();
+    const manageChoice = (number) => {
+        makeChoice(number);
         
         if(GameBoard.getBoard()[choice] === 0)
             setChoice();
@@ -191,7 +191,7 @@ const Game = (() =>{
         playRound,
         getWin,
         getTie,
-        makeChoice
+        playRound
     };
 })();
  
@@ -214,7 +214,7 @@ const DOM = (() => {
 
     const giveClick = (tile, number) => {
         tile.addEventListener('click', function(){
-            Game.makeChoice(number);
+            Game.playRound(number);
         });       
     }
 
