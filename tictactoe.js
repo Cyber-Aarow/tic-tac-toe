@@ -255,12 +255,16 @@ const DOM = (() => {
         const div = document.createElement('div');
         const p1 = document.createElement('p');
         const p2 = document.createElement('p');
+        const dash = document.createElement('p');
         div.classList.add('scoreboard');
         p1.classList.add('score');
         p2.classList.add('score');
+        dash.classList.add('score');
         p1.innerHTML = Game.getPlayer1().getScore();
         p2.innerHTML = Game.getPlayer2().getScore();
+        dash.innerHTML = '-';
         div.appendChild(p1);
+        div.appendChild(dash);
         div.appendChild(p2);
         body.appendChild(div);
     };
