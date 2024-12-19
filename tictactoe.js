@@ -53,6 +53,8 @@ const Game = (() =>{
 
     const getWin = () => win;
     const getTie = () => tie;
+    const getPlayer1 = () => player1;
+    const getPlayer2 = () => player2;
 
     const playRound = (number) => {
         console.log(currentPlayer.getName() + "'s turn");
@@ -195,18 +197,21 @@ const Game = (() =>{
             player2.addScore();
             return "Player 2 wins!";
         }
+        DOM.displayScore();
     };
     return{
         printBoard,
         playRound,
         getWin,
         getTie,
+        getPlayer1,
+        getPlayer2,
         playRound
     };
 })();
  
 const DOM = (() => {
-    
+    const body = document.querySelector('body');    
     const chooseLetter = (number) => {
         const p = document.createElement('p');
         if(number === 0){
@@ -240,13 +245,27 @@ const DOM = (() => {
             li.appendChild(chooseLetter(board[i]));
             ul.appendChild(li);
         }
-        const body = document.querySelector('body');
         body.innerHTML = '';
         body.appendChild(ul);
     };
 
+    const displayScore = () => {
+        const div = document.createElement('div');
+        const p1 = document.createElement('p');
+        const p2 = document.createElement('p');
+        div.classList.add('scoreboard');
+        p1.classList.add('score');
+        p2.classList.add('score');
+        p1.innerHTML = Game.getPlayer1().getScore();
+        p2.innerHTML = Game.getPlayer2().getScore();
+        div.appendChild(p1);
+        div.appendChild(p2);
+        body.appendChild(div);
+    };
+
     return{
-        displayBoard
+        displayBoard,
+        displayScore
     };
 })();
 
