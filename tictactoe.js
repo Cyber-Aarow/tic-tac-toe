@@ -185,19 +185,21 @@ const Game = (() =>{
         if(win === 0){
             if(move_count === 9){
                 tie = true;
+                DOM.displayScore();
                 return "It's a tie!";
             }
             return "Round played.";
         }
         else if(win === 1) {
             player1.addScore();
+            DOM.displayScore();
             return "Player 1 wins!";
         }
         else if(win === 2) {
             player2.addScore();
+            DOM.displayScore();
             return "Player 2 wins!";
         }
-        DOM.displayScore();
     };
     return{
         printBoard,
