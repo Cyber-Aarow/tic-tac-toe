@@ -252,23 +252,35 @@ const DOM = (() => {
     };
 
     const displayScore = () => {
-        const div = document.createElement('div');
+        const scoreboard = document.createElement('div');
+        const top = document.createElement('div');
         const p1 = document.createElement('p');
-        const p2 = document.createElement('p');
         const dash = document.createElement('p');
-        div.classList.add('scoreboard');
+        const p2 = document.createElement('p');
+        const bottom = document.createElement('div');
+        const restart = document.createElement('button');
+        
+        scoreboard.classList.add('scoreboard');
+        top.classList.add('top');
         p1.classList.add('score');
-        p2.classList.add('score');
         dash.classList.add('score');
+        p2.classList.add('score');
+        bottom.classList.add('bottom');
+        restart.classList.add('restart');
+        
         p1.innerHTML = Game.getPlayer1().getScore();
-        p2.innerHTML = Game.getPlayer2().getScore();
         dash.innerHTML = '-';
-        div.appendChild(p1);
-        div.appendChild(dash);
-        div.appendChild(p2);
-        body.appendChild(div);
-    };
-
+        p2.innerHTML = Game.getPlayer2().getScore();
+        restart.innerHTML = "Play again?";
+        
+        top.appendChild(p1);
+        top.appendChild(dash);
+        top.appendChild(p2);
+        bottom.appendChild(restart);
+        scoreboard.appendChild(top);
+        scoreboard.appendChild(bottom);
+        body.appendChild(scoreboard);
+    }
     return{
         displayBoard,
         displayScore
@@ -277,4 +289,3 @@ const DOM = (() => {
 
 //Global code
 DOM.displayBoard();
-
