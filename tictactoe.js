@@ -201,6 +201,13 @@ const Game = (() =>{
             return "Player 2 wins!";
         }
     };
+
+    const restartGame = () => {
+        move_count = 0;
+        GameBoard.clearBoard();
+        DOM.removeScore();
+        DOM.displayBoard();
+    };
     return{
         printBoard,
         playRound,
@@ -208,7 +215,8 @@ const Game = (() =>{
         getTie,
         getPlayer1,
         getPlayer2,
-        playRound
+        playRound,
+        restartGame
     };
 })();
  
@@ -272,6 +280,8 @@ const DOM = (() => {
         dash.innerHTML = '-';
         p2.innerHTML = Game.getPlayer2().getScore();
         restart.innerHTML = "Play again?";
+
+        restartFunction(restart);
         
         top.appendChild(p1);
         top.appendChild(dash);
@@ -281,9 +291,21 @@ const DOM = (() => {
         scoreboard.appendChild(bottom);
         body.appendChild(scoreboard);
     }
+
+    const removeScore = () => {
+        const scoreboard = document.querySelector('.scoreboard');
+        body.removeChild(scoreboard);
+    }
+
+    const restartFunction = (button) => {
+        button.addEventListener('click', function(){
+            Game.restartGame();
+        });
+    }
     return{
         displayBoard,
-        displayScore
+        displayScore,
+        removeScore
     };
 })();
 
