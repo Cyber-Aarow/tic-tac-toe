@@ -50,11 +50,13 @@ const Game = (() =>{
     let win = 0;
     let move_count = 0;
     let tie = false;
+    let strikethrough_setter = 0;
 
     const getWin = () => win;
     const getTie = () => tie;
     const getPlayer1 = () => player1;
     const getPlayer2 = () => player2;
+    const getStrikethrough = () => strikethrough_setter;
 
     const playRound = (number) => {
         console.log(currentPlayer.getName() + "'s turn");
@@ -115,67 +117,83 @@ const Game = (() =>{
         const rowOneCheck = () => {
             if((board[0] === board[1]) && (board[0] === board[2]) && (board[0] === 1)){
                 win1 = true;
+                strikethrough_setter = 1;
             }
             else if((board[0] === board[1]) && (board[0] === board[2]) && (board[0] === 2)){
                 win2 = true;
+                strikethrough_setter = 1;
             }
         };
         const rowTwoCheck = () => {
             if((board[3] === board[4]) && (board[3] === board[5]) && (board[3] === 1)){
                 win1 = true;
+                strikethrough_setter = 2;
             }
             else if((board[3] === board[4]) && (board[3] === board[5]) && (board[3] === 2)){
                 win2 = true;
+                strikethrough_setter = 2;
             }
         };
         const rowThreeCheck = () => {
             if((board[6] === board[7]) && (board[6] === board[8]) && (board[6] === 1)){
                 win1 = true;
+                strikethrough_setter = 3;
             }
             else if((board[6] === board[7]) && (board[6] === board[8]) && (board[6] === 2)){
                 win2 = true;
+                strikethrough_setter = 3;
             }
         };
         //Columns
         const colOneCheck = () => {
             if((board[0] === board[3]) && (board[0] === board[6]) && (board[0] === 1)){
                 win1 = true;
+                strikethrough_setter = 4;
             }
             else if((board[0] === board[3]) && (board[0] === board[6]) && (board[0] === 2)){
                 win2 = true;
+                strikethrough_setter = 4;
             }
         };
         const colTwoCheck = () => {
             if((board[1] === board[4]) && (board[1] === board[7]) && (board[1] === 1)){
                 win1 = true;
+                strikethrough_setter = 5;
             }
             else if((board[1] === board[4]) && (board[1] === board[7]) && (board[1] === 2)){
                 win2 = true;
+                strikethrough_setter = 5;
             }
         };
         const colThreeCheck = () => {
             if((board[2] === board[5]) && (board[2] === board[8]) && (board[2] === 1)){
                 win1 = true;
+                strikethrough_setter = 6;
             }
             else if((board[2] === board[5]) && (board[2] === board[8]) && (board[2] === 2)){
                 win2 = true;
+                strikethrough_setter = 6;
             }
         };
         //Diagonals
         const diagLTRCheck = () => {
             if((board[0] === board[4]) && (board[0] === board[8]) && (board[0] === 1)){
                 win1 = true;
+                strikethrough_setter = 7;
             }
             else if((board[0] === board[4]) && (board[0] === board[8]) && (board[0] === 2)){
                 win2 = true;
+                strikethrough_setter = 7;
             }
         };
         const diagRTLCheck = () => {
             if((board[2] === board[4]) && (board[2] === board[6]) && (board[2] === 1)){
                 win1 = true;
+                strikethrough_setter = 8;
             }
             else if((board[2] === board[4]) && (board[2] === board[6]) && (board[2] === 2)){
                 win2 = true;
+                strikethrough_setter = 8;
             }
         };
         return runCheck();
@@ -204,8 +222,10 @@ const Game = (() =>{
 
     const restartGame = () => {
         move_count = 0;
+        win = 0;
         GameBoard.clearBoard();
         DOM.removeScore();
+        DOM.removeStrikethrough();
         DOM.displayBoard();
     };
     return{
@@ -215,6 +235,7 @@ const Game = (() =>{
         getTie,
         getPlayer1,
         getPlayer2,
+        getStrikethrough,
         playRound,
         restartGame
     };
@@ -297,15 +318,38 @@ const DOM = (() => {
         body.removeChild(scoreboard);
     }
 
+
     const restartFunction = (button) => {
         button.addEventListener('click', function(){
             Game.restartGame();
         });
     }
+
+    const displayStrikethrough = () => {
+        const line = document.createElement('div');
+        line.classList.add('strikethrough');
+        line.classList.add(`line${Game.getStrikethrough()}`);
+        if((Game.getStrikethrough() >= 1) && (Game.getStrikethrough <= 3)){
+            line.classList.add('horizontal');
+        }
+        else if((Game.getStrikethrough() >= 4) && (Game.getStrikethrough <= 6)){
+            line.classList.add('vertical');
+        }
+        else if((Game.getStrikethrough() === 7) || (Game.getStrikethrough === 8)){
+            line.classList.add('diagonal');
+        }
+        body.appendChild(line);
+    };
+
+    const removeStrikethrough = () => {
+        const line = querySelector('.strikethrough');
+        body.removeChild(line);
+    };
     return{
         displayBoard,
         displayScore,
-        removeScore
+        removeScore,
+        removeStrikethrough
     };
 })();
 
