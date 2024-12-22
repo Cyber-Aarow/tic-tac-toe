@@ -83,19 +83,19 @@ body{
     font-size: 4vh;
 }
 
-.line{
+.strikethrough{
     background-color: rgb(94, 13, 13);
     position: absolute;
-    z-index: 2;
+    z-index: 4;
 }
 
 .horizontal{
-    height: 3vh;
-    width: 30vh;
+    height: 2vh;
+    width: 85vh;
 }
 
 .line1{
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 18%;
+    left: 22%;
+    transform: translate(-18%, -22%);
 }

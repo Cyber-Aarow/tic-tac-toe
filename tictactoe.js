@@ -210,11 +210,13 @@ const Game = (() =>{
         }
         else if(win === 1) {
             player1.addScore();
+            DOM.displayStrikethrough();
             DOM.displayScore();
             return "Player 1 wins!";
         }
         else if(win === 2) {
             player2.addScore();
+            DOM.displayStrikethrough();
             DOM.displayScore();
             return "Player 2 wins!";
         }
@@ -225,8 +227,8 @@ const Game = (() =>{
         win = 0;
         GameBoard.clearBoard();
         DOM.removeScore();
-        DOM.removeStrikethrough();
         DOM.displayBoard();
+        DOM.removeStrikethrough();
     };
     return{
         printBoard,
@@ -243,16 +245,16 @@ const Game = (() =>{
  
 const DOM = (() => {
     const body = document.querySelector('body');    
-    const chooseLetter = (number) => {
+    const chooseLetter = (player_number) => {
         const p = document.createElement('p');
-        if(number === 0){
+        if(player_number === 0){
             p.innerHTML = '#';
             p.style.opacity = '0';
         }
-        else if(number === 1){
+        else if(player_number === 1){
             p.innerHTML = 'X';
         }
-        else if(number === 2){
+        else if(player_number === 2){
             p.innerHTML = 'O';
         }
         return p;
@@ -329,7 +331,7 @@ const DOM = (() => {
         const line = document.createElement('div');
         line.classList.add('strikethrough');
         line.classList.add(`line${Game.getStrikethrough()}`);
-        if((Game.getStrikethrough() >= 1) && (Game.getStrikethrough <= 3)){
+        if((Game.getStrikethrough() >= 1) && (Game.getStrikethrough() <= 3)){
             line.classList.add('horizontal');
         }
         else if((Game.getStrikethrough() >= 4) && (Game.getStrikethrough <= 6)){
@@ -349,6 +351,7 @@ const DOM = (() => {
         displayBoard,
         displayScore,
         removeScore,
+        displayStrikethrough,
         removeStrikethrough
     };
 })();
