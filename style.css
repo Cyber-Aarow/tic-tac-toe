@@ -96,6 +96,6 @@ body{
 
 .line1{
     top: 18%;
-    left: 22%;
-    transform: translate(-18%, -22%);
+    left: 50%;
+    transform: translate(-50%, -18%);
 }
