@@ -334,10 +334,10 @@ const DOM = (() => {
         if((Game.getStrikethrough() >= 1) && (Game.getStrikethrough() <= 3)){
             line.classList.add('horizontal');
         }
-        else if((Game.getStrikethrough() >= 4) && (Game.getStrikethrough <= 6)){
+        else if((Game.getStrikethrough() >= 4) && (Game.getStrikethrough() <= 6)){
             line.classList.add('vertical');
         }
-        else if((Game.getStrikethrough() === 7) || (Game.getStrikethrough === 8)){
+        else if((Game.getStrikethrough() === 7) || (Game.getStrikethrough() === 8)){
             line.classList.add('diagonal');
         }
         body.appendChild(line);

@@ -59,6 +59,8 @@ body{
 
     display: flex;
     flex-direction: column;
+
+    opacity: 60%;
 }
 
 .top{
@@ -86,16 +88,37 @@ body{
 .strikethrough{
     background-color: rgb(94, 13, 13);
     position: absolute;
-    z-index: 4;
+    z-index: 2;
 }
 
 .horizontal{
     height: 2vh;
     width: 85vh;
+    left: 50%;
 }
 
 .line1{
     top: 18%;
-    left: 50%;
     transform: translate(-50%, -18%);
+}
+
+.line2{
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.line3{
+    top: 83%;
+    transform: translate(-50%, -83%);
+}
+
+.vertical{
+    height: 85vh;
+    width: 2vh;
+}
+
+.line4{
+    top: 18%;
+    left: 40%;
+    transform: translate(-18%, -50%);
 }
