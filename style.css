@@ -40,6 +40,7 @@ body{
     cursor: pointer;
 }
 
+/*Scoreboard*/
 .scoreboard {
     position: absolute;
     left: 50%;
@@ -85,6 +86,7 @@ body{
     font-size: 4vh;
 }
 
+/*Strikethrough Line*/
 .strikethrough{
     background-color: rgb(94, 13, 13);
     position: absolute;
@@ -92,6 +94,7 @@ body{
     border-radius: 25px;
 }
 
+/*Horizontal*/
 .horizontal{
     height: 1.5vh;
     width: 85vh;
@@ -113,6 +116,7 @@ body{
     transform: translate(-50%, -83%);
 }
 
+/*Vertical*/
 .vertical{
     height: 85vh;
     width: 1.5vh;
@@ -132,4 +136,22 @@ body{
 .line6{
     left: 81.5%;
     transform: translate(-81.5%, -48%);
+}
+
+/*Diagonal*/
+.diagonal{
+    height: 115vh;
+    width: 1.5vh;
+}
+
+.line7{
+    left: 50%;
+    top: 14%;
+    transform: translate(-45%, -18%) rotate(-45deg);
+}
+
+.line8{
+    left: 50%;
+    top: 14%;
+    transform: translate(-45%, -18%) rotate(45deg);
 }
