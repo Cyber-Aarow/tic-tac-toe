@@ -89,10 +89,11 @@ body{
     background-color: rgb(94, 13, 13);
     position: absolute;
     z-index: 2;
+    border-radius: 25px;
 }
 
 .horizontal{
-    height: 2vh;
+    height: 1.5vh;
     width: 85vh;
     left: 50%;
 }
@@ -114,11 +115,21 @@ body{
 
 .vertical{
     height: 85vh;
-    width: 2vh;
+    width: 1.5vh;
+    top: 48%;
 }
 
 .line4{
-    top: 18%;
-    left: 40%;
-    transform: translate(-18%, -50%);
+    left: 18%;
+    transform: translate(-18%, -48%);
+}
+
+.line5{
+    left: 49.5%;
+    transform: translate(-49.5%, -48%);
+}
+
+.line6{
+    left: 81.5%;
+    transform: translate(-81.5%, -48%);
 }
