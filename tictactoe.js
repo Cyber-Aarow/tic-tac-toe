@@ -290,6 +290,8 @@ const DOM = (() => {
         const p2 = document.createElement('p');
         const bottom = document.createElement('div');
         const restart = document.createElement('button');
+
+        const overlay = document.createElement('div');
         
         scoreboard.classList.add('scoreboard');
         top.classList.add('top');
@@ -298,6 +300,8 @@ const DOM = (() => {
         p2.classList.add('score');
         bottom.classList.add('bottom');
         restart.classList.add('restart');
+
+        overlay.classList.add('overlay');
         
         p1.innerHTML = Game.getPlayer1().getScore();
         dash.innerHTML = '-';
@@ -312,11 +316,17 @@ const DOM = (() => {
         bottom.appendChild(restart);
         scoreboard.appendChild(top);
         scoreboard.appendChild(bottom);
-        body.appendChild(scoreboard);
+
+        setTimeout(() => {
+            body.appendChild(scoreboard);
+        }, 2000);
+        body.appendChild(overlay);
     }
 
     const removeScore = () => {
+        const overlay = document.querySelector('.overlay');
         const scoreboard = document.querySelector('.scoreboard');
+        body.removeChild(overlay);
         body.removeChild(scoreboard);
     }
 
