@@ -245,6 +245,29 @@ const Game = (() =>{
  
 const DOM = (() => {
     const body = document.querySelector('body');    
+
+    const displayStartForm = () => {
+        const form = document.createElement('form');
+        const player1_input = document.createElement('input');
+        const player2_input = document.createElement('input');
+        const button = document.createElement('button');
+
+        button.classList.add('start-button');
+        giveStartClick(button);
+        button.innerHTML = "Start Game";
+        form.classList.add('start-form');
+
+        form.appendChild(player1_input);
+        form.appendChild(player2_input);
+        form.appendChild(button);
+        body.appendChild(form);
+    };
+
+    const removeStartForm = () => {
+        form = document.querySelector('.start-form');
+        form.remove();
+    };
+
     const chooseLetter = (player_number) => {
         const p = document.createElement('p');
         if(player_number === 0){
@@ -265,6 +288,13 @@ const DOM = (() => {
             console.log(Game.playRound(number));
         });       
     }
+
+    const giveStartClick = (button) =>{
+        button.addEventListener('click', function(){
+            removeStartForm();
+            displayBoard();
+        });
+    };
 
     const displayBoard = () => {
         const board = GameBoard.getBoard();
@@ -359,6 +389,7 @@ const DOM = (() => {
     };
     return{
         displayBoard,
+        displayStartForm,
         displayScore,
         removeScore,
         displayStrikethrough,
@@ -367,4 +398,4 @@ const DOM = (() => {
 })();
 
 //Global code
-DOM.displayBoard();
+DOM.displayStartForm();

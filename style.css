@@ -14,6 +14,30 @@ body{
     height: 100vh;
 }
 
+.start-form {
+    height: 80vh;
+    width: fit-content;
+    border: solid black 1.5vh;
+    color: black;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 10vh;
+}
+
+.start-button {
+    color: white;
+    background-color: green;
+    border: solid darkgreen 0.5vh;
+    width: 30vh;
+    height: 10vh;
+    font-size: 5vh;
+}
+
+input {
+    border: solid black 0.05vh;
+}
+
 .gameboard {
     position: relative;
     display: grid;
