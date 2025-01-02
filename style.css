@@ -22,7 +22,7 @@ body{
     background-color: white;
     display: flex;
     flex-direction: column;
-    padding: 10vh;
+    padding: 5vh;
 }
 
 .start-button {
@@ -32,10 +32,17 @@ body{
     width: 30vh;
     height: 10vh;
     font-size: 5vh;
+    margin: auto;
 }
 
 input {
-    border: solid black 0.05vh;
+    border: solid black 0.25vh;
+    margin-bottom: 6vh;
+    height: 8vh;
+    width: 70vh;
+    font-size: 6vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
 }
 
 .gameboard {
