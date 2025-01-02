@@ -250,6 +250,8 @@ const DOM = (() => {
         const form = document.createElement('form');
         const player1_input = document.createElement('input');
         const player2_input = document.createElement('input');
+        const player1_label = document.createElement('label');
+        const player2_label = document.createElement('label');
         const button = document.createElement('button');
 
         button.classList.add('start-button');
@@ -257,7 +259,17 @@ const DOM = (() => {
         button.innerHTML = "Start Game";
         form.classList.add('start-form');
 
+        player1_input.setAttribute('id', 'p1_input');
+        player2_input.setAttribute('id', 'p2_input');
+        player1_label.setAttribute('for', 'p1_input');
+        player2_label.setAttribute('for', 'p2_input');
+
+        player1_label.innerHTML = 'Player 1';
+        player2_label.innerHTML = 'Player 2';
+
+        form.appendChild(player1_label);
         form.appendChild(player1_input);
+        form.appendChild(player2_label);
         form.appendChild(player2_input);
         form.appendChild(button);
         body.appendChild(form);
