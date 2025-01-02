@@ -86,7 +86,7 @@ label {
     transform: translate(-50%, -50%);
     z-index: 4;
 
-    width: auto;
+    width: 90vh;
     height: auto;
     padding: 0 5vh 3vh 5vh;
 
@@ -95,7 +95,8 @@ label {
     color: black;
     background-color: white;
     font-size: clamp(10px, 30vh, 700px);
-
+    text-align: center;
+    
     display: flex;
     flex-direction: column;
 }
@@ -113,8 +114,33 @@ label {
 
 .top{
     flex: 2;
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+}
+
+.sb_div{
     display: flex;
-    gap: 10vh;
+    flex-direction: column;
+    height: fit-content;
+    grid-column: span 1;
+    max-width: 2fr;
+}
+
+.sb_player{
+    width: 100%;
+
+    font-size: clamp(5px, 10vh, 350px);
+    color: rgb(94, 13, 13);
+    font-family: 'Journal', cursive, sans-serif;
+    letter-spacing: 1vh;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.dash{
+    margin-top: 10vh;
 }
 
 .bottom{

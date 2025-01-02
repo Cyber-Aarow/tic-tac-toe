@@ -245,7 +245,8 @@ const Game = (() =>{
  
 const DOM = (() => {
     const body = document.querySelector('body');    
-
+    let player1 = '';
+    let player2 = '';
     const displayStartForm = () => {
         const form = document.createElement('form');
         const player1_input = document.createElement('input');
@@ -259,9 +260,9 @@ const DOM = (() => {
         button.innerHTML = "Start Game";
         form.classList.add('start-form');
 
-        player1_input.setAttribute('id', 'p1_input');
+        player1_input.setAttribute('id', 'p1_score_input');
         player2_input.setAttribute('id', 'p2_input');
-        player1_label.setAttribute('for', 'p1_input');
+        player1_label.setAttribute('for', 'p1_score_input');
         player2_label.setAttribute('for', 'p2_input');
 
         player1_label.innerHTML = 'Player 1';
@@ -273,6 +274,14 @@ const DOM = (() => {
         form.appendChild(player2_input);
         form.appendChild(button);
         body.appendChild(form);
+    };
+
+    const setPlayerNames = () =>{
+        const p1_score_input = document.querySelector('#p1_score_input');
+        const p2_input = document.querySelector('#p2_input');
+        
+        player1 = p1_score_input.value;
+        player2 = p2_input.value;
     };
 
     const removeStartForm = () => {
@@ -303,10 +312,13 @@ const DOM = (() => {
 
     const giveStartClick = (button) =>{
         button.addEventListener('click', function(){
+            setPlayerNames();
             removeStartForm();
             displayBoard();
         });
     };
+
+
 
     const displayBoard = () => {
         const board = GameBoard.getBoard();
@@ -327,9 +339,15 @@ const DOM = (() => {
     const displayScore = () => {
         const scoreboard = document.createElement('div');
         const top = document.createElement('div');
-        const p1 = document.createElement('p');
+        
+        const d1 = document.createElement('div');
+        const p1_name = document.createElement('h1');
+        const p1_score = document.createElement('p');
         const dash = document.createElement('p');
-        const p2 = document.createElement('p');
+        const p2_name = document.createElement('h1');
+        const d2 = document.createElement('div');
+        const p2_score = document.createElement('p');
+
         const bottom = document.createElement('div');
         const restart = document.createElement('button');
 
@@ -337,24 +355,35 @@ const DOM = (() => {
         
         scoreboard.classList.add('scoreboard');
         top.classList.add('top');
-        p1.classList.add('score');
+        d1.classList.add('sb_div');
+        d2.classList.add('sb_div');
+        p1_name.classList.add('sb_player');
+        p2_name.classList.add('sb_player');
+        p1_score.classList.add('score');
         dash.classList.add('score');
-        p2.classList.add('score');
+        p2_score.classList.add('score');
+        dash.classList.add('dash');
         bottom.classList.add('bottom');
         restart.classList.add('restart');
 
         overlay.classList.add('overlay');
         
-        p1.innerHTML = Game.getPlayer1().getScore();
+        p1_name.innerHTML = player1;
+        p1_score.innerHTML = Game.getPlayer1().getScore();
         dash.innerHTML = '-';
-        p2.innerHTML = Game.getPlayer2().getScore();
+        p2_name.innerHTML = player2;
+        p2_score.innerHTML = Game.getPlayer2().getScore();
         restart.innerHTML = "Play again?";
 
         restartFunction(restart);
         
-        top.appendChild(p1);
+        d1.appendChild(p1_name);
+        d1.appendChild(p1_score);
+        d2.appendChild(p2_name);
+        d2.appendChild(p2_score);        
+        top.appendChild(d1);
         top.appendChild(dash);
-        top.appendChild(p2);
+        top.appendChild(d2);
         bottom.appendChild(restart);
         scoreboard.appendChild(top);
         scoreboard.appendChild(bottom);
