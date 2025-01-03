@@ -116,6 +116,7 @@ label {
     flex: 2;
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
+    overflow: hidden;
 }
 
 .sb_div{
@@ -123,10 +124,11 @@ label {
     flex-direction: column;
     height: fit-content;
     grid-column: span 1;
-    max-width: 2fr;
+    max-width: 31.71vh;
 }
 
 .sb_player{
+    grid-column: span 1;
     width: 100%;
 
     font-size: clamp(5px, 10vh, 350px);
