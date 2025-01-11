@@ -247,6 +247,7 @@ const DOM = (() => {
     const body = document.querySelector('body');    
     let player1 = '';
     let player2 = '';
+    //let move_count = 0;
     const displayStartForm = () => {
         const form = document.createElement('form');
         const player1_input = document.createElement('input');
@@ -308,7 +309,17 @@ const DOM = (() => {
         tile.addEventListener('click', function(){
             console.log(Game.playRound(number));
         });       
-    }
+    };
+
+    /*const giveHover = (object) => {
+        object.addEventListener('mouseover', function(){
+            if(move_count % 2 === 1) object.innerHTML = 'X';
+            else object.innerHTML = 'O';
+        });
+        object.addEventListener('mouseout', function(){
+            object.innerHTML = '';
+        });
+    };*/
 
     const giveStartClick = (button) =>{
         button.addEventListener('click', function(){
@@ -329,11 +340,16 @@ const DOM = (() => {
             li.classList.add('tile');
             li.classList.add('t' + i.toString());
             giveClick(li, i);
+            /*if(li.innerHTML != ''){}
+            else{
+                giveHover(li);
+            }*/
             li.appendChild(chooseLetter(board[i]));
             ul.appendChild(li);
         }
         body.innerHTML = '';
         body.appendChild(ul);
+        //move_count++;
     };
 
     const displayScore = () => {
