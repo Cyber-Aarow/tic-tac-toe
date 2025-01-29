@@ -7,6 +7,14 @@
     border: none;
 }
 
+@font-face {
+    font-family: 'Journal';
+    src: url('fonts/journal_regular-webfont.woff') format('woff'),
+         url('fonts/journal_regular-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body{
     display: flex;
     justify-content: center;
