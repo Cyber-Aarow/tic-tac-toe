@@ -46,6 +46,7 @@ const Game = (() =>{
     const player2 = Player(2);
     const players = [player1, player2];
     let currentPlayer = players[0];
+    let startingPlayer = players[0];
     let choice = 0;
     let win = 0;
     let move_count = 0;
@@ -74,8 +75,13 @@ const Game = (() =>{
         console.log(row1 + '\n' + row2 + '\n' + row3);
     };
     
-    const switchPlayer = () => {
-        currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
+    const switchPlayer = (player) => {
+        player = player === players[0] ? players[1] : players[0];
+        return player;
+    };
+
+    const resetPlayer = () =>{
+        if(startingPlayer != currentPlayer) currentPlayer = switchPlayer(currentPlayer);
     };
 
     const setChoice = () => {
@@ -86,7 +92,7 @@ const Game = (() =>{
         
         if(GameBoard.getBoard()[choice] === 0){
             setChoice();
-            switchPlayer();
+            currentPlayer = switchPlayer(currentPlayer);
             DOM.displayBoard();
             move_count++;
         }
@@ -225,6 +231,8 @@ const Game = (() =>{
     const restartGame = () => {
         move_count = 0;
         win = 0;
+        startingPlayer = switchPlayer(startingPlayer);
+        resetPlayer();
         GameBoard.clearBoard();
         DOM.removeScore();
         DOM.displayBoard();
